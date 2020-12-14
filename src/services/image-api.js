@@ -15,4 +15,8 @@ function fetchImage({ imageQuery = "", currentPage = 1 }) {
   });
 }
 
-export default { fetchImage };
+const api = {
+  fetchImage,
+};
+
+export default api;

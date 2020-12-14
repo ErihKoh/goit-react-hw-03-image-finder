@@ -3,8 +3,8 @@ import s from "./ImageGallery.module.css";
 
 function ImageGallery({ images, onClick }) {
   return (
-    <ul className={s.ImageGallery} onClick={onClick}>
-      <ImageGalleryItem images={images} />
+    <ul className={s.ImageGallery}>
+      <ImageGalleryItem images={images} onClick={onClick} />
     </ul>
   );
 }

@@ -15,7 +15,6 @@ class App extends Component {
     images: [],
     currentPage: 1,
     imageQuery: "",
-    showModal: false,
     largeImage: "",
     isLoading: false,
     error: null,
@@ -34,15 +33,14 @@ class App extends Component {
   }
 
   toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
+    this.setState({
+      largeImage: "",
+    });
   };
 
   onClickImage = (e) => {
     e.preventDefault();
     if (e.target.nodeName === "IMG") {
-      this.toggleModal();
       this.setState({ largeImage: e.target.dataset.image });
     }
   };
@@ -52,7 +50,7 @@ class App extends Component {
   };
 
   fetchImage = () => {
-    const { currentPage, imageQuery, isLoading } = this.state;
+    const { currentPage, imageQuery } = this.state;
 
     const options = {
       currentPage,
@@ -78,7 +76,7 @@ class App extends Component {
   };
 
   render() {
-    const { images, showModal, isLoading } = this.state;
+    const { images, isLoading, largeImage } = this.state;
     return (
       <div className="App">
         <Searchbar onSubmit={this.handleFormSubmit} />
@@ -94,7 +92,7 @@ class App extends Component {
           )}
         </div>
         {images.length > 0 && <ButtonLoadMore onClick={this.fetchImage} />}
-        {showModal && (
+        {largeImage && (
           <Modal onClose={this.toggleModal}>
             <img src={this.state.largeImage} alt="modal" />
           </Modal>
